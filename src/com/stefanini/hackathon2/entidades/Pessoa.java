@@ -15,7 +15,7 @@ public class Pessoa {
 	@Column(nullable = false)
 	private String nome;
 	@Column(nullable = false)
-	private Long cpf;
+	private String cpf;
 	@Column(nullable = false)
 	private String telefone;
 	@Column(nullable = false)
@@ -40,11 +40,11 @@ public class Pessoa {
 		this.nome = nome;
 	}
 
-	public Long getCpf() {
+	public String getCpf() {
 		return cpf;
 	}
 
-	public void setCpf(Long cpf) {
+	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
 

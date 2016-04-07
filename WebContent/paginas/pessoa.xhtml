@@ -28,13 +28,14 @@
 						<p:message for="nome" />
 
 						<p:outputLabel for="cpf" value="CPF:" />
-						<p:inputText id="cpf" requiredMessage="Campo obrigatório"
-							required="true" value="#{pessoaManagedBean.pessoa.cpf}" />
+						<p:inputMask id="cpf" requiredMessage="Campo obrigatório"
+							mask="999.999.999-99" required="true"
+							value="#{pessoaManagedBean.pessoa.cpf}" />
 						<p:message for="cpf" />
 
 						<p:outputLabel for="telefone" value="Telefone:" />
-						<p:inputMask maxlength="14" id="telefone"
-							requiredMessage="Campo obrigatório" mask="99?9999?9999"
+						<p:inputMask maxlength="16" id="telefone"
+							requiredMessage="Campo obrigatório" mask="99-9999-9999"
 							required="true" value="#{pessoaManagedBean.pessoa.telefone}" />
 						<p:message for="telefone" />
 
@@ -73,12 +74,13 @@
 					</p:column>
 					<p:column headerText="Ações" style="text-align: center">
 						<p:commandButton icon="fa fa-fw fa-edit" title="Editar Cadastro"
-							update="pessoaForm" action="#{pessoaManagedBean.setPessoa(pessoa)}" />
+							update="pessoaForm"
+							action="#{pessoaManagedBean.setPessoa(pessoa)}" />
 						<p:commandButton icon="fa fa-fw fa-trash" title="Deletar Cadastro"
 							update="tabelaDePessoas pessoaForm"
 							action="#{pessoaManagedBean.deletar(pessoa)}">
-							<p:confirm header="Confirmação" message="Deseja deletar o Cadastro?"
-								icon="ui-icon-alert" />
+							<p:confirm header="Confirmação"
+								message="Deseja deletar o Cadastro?" icon="ui-icon-alert" />
 						</p:commandButton>
 
 						<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
