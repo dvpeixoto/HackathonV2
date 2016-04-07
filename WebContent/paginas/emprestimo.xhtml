@@ -3,11 +3,94 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-	
-	<ui:composition template="/WEB-INF/modelos/padrao.xhtml">
-		<ui:define name="conteudo">
-		</ui:define>
-	</ui:composition>
-	
+
+<ui:composition template="/WEB-INF/modelos/padrao.xhtml">
+	<ui:define name="conteudo">
+
+		<p:layout>
+			<p:layoutUnit position="north" style="text-align: center;">
+				<p:outputLabel style="font-size: 20px;"
+					value="Manutenção de Cadastros" />
+			</p:layoutUnit>
+
+			<p:layoutUnit position="center">
+
+				<h:form id="pessoaForm">
+					<p:growl id="growl" showDetail="true" sticky="false" life="4000" />
+
+					<p:panelGrid columns="3">
+
+						<p:outputLabel for="nome" value="Nome:" />
+						<p:inputText id="nome" requiredMessage="Campo obrigatório"
+							required="true" value="#{pessoaManagedBean.pessoa.nome}" />
+						<p:message for="nome" />
+
+						<p:outputLabel for="cpf" value="CPF:" />
+						<p:inputMask id="cpf" requiredMessage="Campo obrigatório"
+							mask="999.999.999-99" required="true"
+							value="#{pessoaManagedBean.pessoa.cpf}" />
+						<p:message for="cpf" />
+
+						<p:outputLabel for="telefone" value="Telefone:" />
+						<p:inputMask maxlength="16" id="telefone"
+							requiredMessage="Campo obrigatório" mask="99-9999-9999"
+							required="true" value="#{pessoaManagedBean.pessoa.telefone}" />
+						<p:message for="telefone" />
+
+						<p:outputLabel for="nomeLivro" value="Titulo:" />
+						<p:inputText id="nomeLivro" requiredMessage="Campo obrigatório"
+							required="true" value="#{pessoaManagedBean.pessoa.endereco}" />
+						<p:message for="endereco" />
+
+					</p:panelGrid>
+
+					<p:commandButton value="Salvar" process="@form"
+						update="@form tabelaDePessoas"
+						action="#{pessoaManagedBean.salvar()}" icon="fa fa-fw fa-save" />
+					<p:commandButton value="Limpar" process="@this" update="@form"
+						action="#{pessoaManagedBean.limpar()}" icon="fa fa-fw fa-eraser" />
+				</h:form>
+
+				<p:dataTable id="tabelaDeEmprestimos" var="emprestimo"
+					value="#{emprestimoManagedBean.listaDeEmprestimos}"
+					emptyMessage="Não existe emprestimos no banco"
+					style="padding-top:20px;">
+					<p:column headerText="Id">
+						<h:outputText value="#{emprestimo.id}" />
+					</p:column>
+					<p:column headerText="Nome">
+						<h:outputText value="#{emprestimo.pessoa.nome}" />
+					</p:column>
+					<p:column headerText="Telefone">
+						<h:outputText value="#{emprestimo.pessoa.telefone}" />
+					</p:column>
+					<p:column headerText="Titulo">
+						<h:outputText value="#{emprestimo.livro.nome}" />
+					</p:column>
+					<p:column headerText="Ações" style="text-align: center">
+						<p:commandButton icon="fa fa-fw fa-trash" title="Devolver Livro"
+							update="tabelaDeEmprestimos emprestimoForm"
+							action="#{emprestimoManagedBean.devolver(emprestimo)}">
+							<p:confirm header="Confirmação"
+								message="Deseja devolver o Livro?" icon="ui-icon-alert" />
+						</p:commandButton>
+
+						<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+							<p:commandButton value="Sim" type="button"
+								styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+							<p:commandButton value="Não" type="button"
+								styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+						</p:confirmDialog>
+					</p:column>
+				</p:dataTable>
+
+			</p:layoutUnit>
+
+		</p:layout>
+
+	</ui:define>
+</ui:composition>
+
 </html>
