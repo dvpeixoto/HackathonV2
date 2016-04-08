@@ -30,12 +30,12 @@ public class EmprestimoManagedBean {
 		limpar();
 	}
 	
-//	public void deletar(Emprestimo emprestimo) {
-//		servico.deletar(emprestimo);
-//		Mensageiro.notificaInformacao("Parabéns!", "Livro devolvido com sucesso!");
-//		carregaListaDeEmprestimos();
-//		limpar();
-//	}
+	public void devolver(Emprestimo emprestimo) {
+		servico.devolver(emprestimo);
+		Mensageiro.notificaInformacao("Parabéns!", "Livro devolvido com sucesso!");
+		carregaListaDeEmprestimos();
+		limpar();
+	}
 
 	public void limpar() {
 		setEmprestimo(new Emprestimo());

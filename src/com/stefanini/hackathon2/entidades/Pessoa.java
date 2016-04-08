@@ -1,17 +1,22 @@
 package com.stefanini.hackathon2.entidades;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Pessoa {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Integer idPessoa;
 	@Column(nullable = false)
 	private String nome;
 	@Column(nullable = false)
@@ -20,16 +25,19 @@ public class Pessoa {
 	private String telefone;
 	@Column(nullable = false)
 	private String endereco;
-
+	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	@Column(name="idPessoa")
+	private List<Emprestimo> listaEmprestimos;
+	
 	public Pessoa() {
 	}
 
-	public Integer getId() {
-		return id;
+	public Integer getIdPessoa() {
+		return idPessoa;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setIdPessoa(Integer id) {
+		this.idPessoa = id;
 	}
 
 	public String getNome() {
@@ -63,6 +71,14 @@ public class Pessoa {
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
 	}
+	
+	public List<Emprestimo> getListaEmprestimos() {
+		return listaEmprestimos;
+	}
+
+	public void setListaEmprestimos(List<Emprestimo> listaEmprestimos) {
+		this.listaEmprestimos = listaEmprestimos;
+	}
 
 	@Override
 	public int hashCode() {
@@ -70,7 +86,8 @@ public class Pessoa {
 		int result = 1;
 		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
 		result = prime * result + ((endereco == null) ? 0 : endereco.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((idPessoa == null) ? 0 : idPessoa.hashCode());
+		result = prime * result + ((listaEmprestimos == null) ? 0 : listaEmprestimos.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((telefone == null) ? 0 : telefone.hashCode());
 		return result;
@@ -95,10 +112,15 @@ public class Pessoa {
 				return false;
 		} else if (!endereco.equals(other.endereco))
 			return false;
-		if (id == null) {
-			if (other.id != null)
+		if (idPessoa == null) {
+			if (other.idPessoa != null)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (!idPessoa.equals(other.idPessoa))
+			return false;
+		if (listaEmprestimos == null) {
+			if (other.listaEmprestimos != null)
+				return false;
+		} else if (!listaEmprestimos.equals(other.listaEmprestimos))
 			return false;
 		if (nome == null) {
 			if (other.nome != null)

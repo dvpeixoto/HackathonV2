@@ -45,7 +45,7 @@
 					<p:dataTable id="tabelaDeLivros" var="livro" value="#{livroManagedBean.listaDeLivrosCadastrados}"
 						emptyMessage="Não existem livros cadastrados" style="padding-top:20px;">
 						<p:column headerText="Id">
-				    	    <h:outputText value="#{livro.id}" />
+				    	    <h:outputText value="#{livro.idLivro}" />
 					    </p:column>
 					    <p:column headerText="Nome">
 				    	    <h:outputText value="#{livro.nome}" />

@@ -15,7 +15,7 @@ public class EmprestimoServico {
 	
 	@Transacional
 	public void salvar(Emprestimo emprestimo) {
-		if (emprestimo.getId() == null) {
+		if (emprestimo.getIdEmprestimo() == null) {
 			repositorio.inserir(emprestimo);
 		} else {
 			repositorio.atualizar(emprestimo);
@@ -28,7 +28,7 @@ public class EmprestimoServico {
 	}
 
 	@Transacional
-	public void deletar(Emprestimo emprestimo) {
+	public void devolver(Emprestimo emprestimo) {
 		repositorio.remover(emprestimo);;
 	}
 	

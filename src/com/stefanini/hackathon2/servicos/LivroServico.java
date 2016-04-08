@@ -15,7 +15,7 @@ public class LivroServico {
 	
 	@Transacional
 	public void salvar(Livro livro) {
-		if (livro.getId() == null) {
+		if (livro.getIdLivro() == null) {
 			repositorio.inserir(livro);
 		} else {
 			repositorio.atualizar(livro);
