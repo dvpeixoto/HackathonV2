@@ -23,34 +23,34 @@
 					<p:panelGrid columns="3">
 
 						<p:outputLabel for="nome" value="Nome:" />
-						<p:inputText id="nome" requiredMessage="Campo obrigatório"
+						<p:inputText id="nome" placeholder="Nome" requiredMessage="Campo obrigatório"
 							required="true" value="#{pessoaManagedBean.pessoa.nome}" />
 						<p:message for="nome" />
 
 						<p:outputLabel for="cpf" value="CPF:" />
-						<p:inputMask id="cpf" requiredMessage="Campo obrigatório"
+						<p:inputMask id="cpf" placeholder="CPF" requiredMessage="Campo obrigatório"
 							mask="999.999.999-99" required="true"
 							value="#{pessoaManagedBean.pessoa.cpf}" />
 						<p:message for="cpf" />
 
 						<p:outputLabel for="telefone" value="Telefone:" />
-						<p:inputMask maxlength="16" id="telefone"
+						<p:inputMask maxlength="16" id="telefone" placeholder="Telefone"
 							requiredMessage="Campo obrigatório" mask="(99) 9999-9999" 
 							required="true" value="#{pessoaManagedBean.pessoa.telefone}" />
 						<p:message for="telefone" />
 
 						<p:outputLabel for="endereco" value="Endereço:" />
-						<p:inputText id="endereco" requiredMessage="Campo obrigatório"
+						<p:inputText id="endereco" placeholder="Endereço" requiredMessage="Campo obrigatório"
 							required="true" value="#{pessoaManagedBean.pessoa.endereco}" />
 						<p:message for="endereco" />
 
 						<p:outputLabel for="usuario" value="Usuário:" />
-						<p:inputText id="usuario" requiredMessage="Campo obrigatório"
+						<p:inputText id="usuario" placeholder="Usuário" requiredMessage="Campo obrigatório"
 							required="true" value="#{pessoaManagedBean.pessoa.usuario}" />
 						<p:message for="usuario" />
 
 						<h:outputLabel for="senha1" value="Senha:" />
-						<p:password id="senha1" value="#{pessoaManagedBean.pessoa.senha}"
+						<p:password id="senha1" placeholder="Senha" value="#{pessoaManagedBean.pessoa.senha}"
 							validatorMessage="Senhas devem ser iguais"
 							promptLabel="Use letras e números" weakLabel="Segurança fraca"
 							goodLabel="Segurança média" strongLabel="Segurança forte"
@@ -59,7 +59,7 @@
 						<p:outputLabel />
 
 						<h:outputLabel for="senha2" value="Repita a senha:" />
-						<p:password id="senha2" value="#{pessoaManagedBean.pessoa.senha}"
+						<p:password id="senha2" placeholder="Repita a senha" value="#{pessoaManagedBean.pessoa.senha}"
 							label="Repita a senha: " required="true" feedback="true"
 							inline="true" />
 						<p:outputLabel />

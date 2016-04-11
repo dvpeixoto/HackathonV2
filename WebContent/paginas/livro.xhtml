@@ -22,17 +22,17 @@
 						<p:panelGrid columns="3">
 						
 							<p:outputLabel for="nome" value="Nome:"/>
-							<p:inputText id="nome" requiredMessage="Campo obrigatório" required="true" 
+							<p:inputText id="nome" placeholder="Nome" requiredMessage="Campo obrigatório" required="true" 
 								value="#{livroManagedBean.livro.nome}" />
 							<p:message for="nome" />
 		
 							<p:outputLabel for="autor" value="Autor:"/>
-							<p:inputText id="autor" requiredMessage="Campo obrigatório" required="true" 
+							<p:inputText id="autor" placeholder="Autor" requiredMessage="Campo obrigatório" required="true" 
 								value="#{livroManagedBean.livro.autor}" />
 							<p:message for="autor" />
 						
 							<p:outputLabel for="paginas" value="Páginas:"/>
-							<p:inputMask maxlength="4" id="paginas" requiredMessage="Campo obrigatório" mask="9?999" required="true" 
+							<p:inputMask maxlength="4" id="paginas" placeholder="Número de páginas" requiredMessage="Campo obrigatório" mask="9?999" required="true" 
 								value="#{livroManagedBean.livro.paginas}" />
 							<p:message for="paginas" />
 						
