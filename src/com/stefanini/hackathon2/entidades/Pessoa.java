@@ -25,10 +25,14 @@ public class Pessoa {
 	private String telefone;
 	@Column(nullable = false)
 	private String endereco;
-	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
-	@Column(name="idPessoa")
+	@Column(nullable = false)
+	private String usuario;
+	@Column(nullable = false)
+	private String senha;
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@Column(name = "idPessoa")
 	private List<Emprestimo> listaEmprestimos;
-	
+
 	public Pessoa() {
 	}
 
@@ -71,7 +75,23 @@ public class Pessoa {
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
 	}
-	
+
+	public String getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
 	public List<Emprestimo> getListaEmprestimos() {
 		return listaEmprestimos;
 	}
@@ -89,7 +109,9 @@ public class Pessoa {
 		result = prime * result + ((idPessoa == null) ? 0 : idPessoa.hashCode());
 		result = prime * result + ((listaEmprestimos == null) ? 0 : listaEmprestimos.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + ((senha == null) ? 0 : senha.hashCode());
 		result = prime * result + ((telefone == null) ? 0 : telefone.hashCode());
+		result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
 		return result;
 	}
 
@@ -127,10 +149,20 @@ public class Pessoa {
 				return false;
 		} else if (!nome.equals(other.nome))
 			return false;
+		if (senha == null) {
+			if (other.senha != null)
+				return false;
+		} else if (!senha.equals(other.senha))
+			return false;
 		if (telefone == null) {
 			if (other.telefone != null)
 				return false;
 		} else if (!telefone.equals(other.telefone))
+			return false;
+		if (usuario == null) {
+			if (other.usuario != null)
+				return false;
+		} else if (!usuario.equals(other.usuario))
 			return false;
 		return true;
 	}

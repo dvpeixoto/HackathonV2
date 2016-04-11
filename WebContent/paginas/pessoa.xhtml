@@ -35,7 +35,7 @@
 
 						<p:outputLabel for="telefone" value="Telefone:" />
 						<p:inputMask maxlength="16" id="telefone"
-							requiredMessage="Campo obrigatório" mask="99-9999-9999"
+							requiredMessage="Campo obrigatório" mask="(99) 9999-9999" 
 							required="true" value="#{pessoaManagedBean.pessoa.telefone}" />
 						<p:message for="telefone" />
 
@@ -43,6 +43,26 @@
 						<p:inputText id="endereco" requiredMessage="Campo obrigatório"
 							required="true" value="#{pessoaManagedBean.pessoa.endereco}" />
 						<p:message for="endereco" />
+
+						<p:outputLabel for="usuario" value="Usuário:" />
+						<p:inputText id="usuario" requiredMessage="Campo obrigatório"
+							required="true" value="#{pessoaManagedBean.pessoa.usuario}" />
+						<p:message for="usuario" />
+
+						<h:outputLabel for="senha1" value="Senha:" />
+						<p:password id="senha1" value="#{pessoaManagedBean.pessoa.senha}"
+							validatorMessage="Senhas devem ser iguais"
+							promptLabel="Use letras e números" weakLabel="Segurança fraca"
+							goodLabel="Segurança média" strongLabel="Segurança forte"
+							match="senha2" label="Senha: " required="true" feedback="true"
+							inline="true" />
+						<p:outputLabel />
+
+						<h:outputLabel for="senha2" value="Repita a senha:" />
+						<p:password id="senha2" value="#{pessoaManagedBean.pessoa.senha}"
+							label="Repita a senha: " required="true" feedback="true"
+							inline="true" />
+						<p:outputLabel />
 
 					</p:panelGrid>
 
@@ -71,6 +91,9 @@
 					</p:column>
 					<p:column headerText="Endereço">
 						<h:outputText value="#{pessoa.endereco}" />
+					</p:column>
+					<p:column headerText="Usuário">
+						<h:outputText value="#{pessoa.usuario}" />
 					</p:column>
 					<p:column headerText="Ações" style="text-align: center">
 						<p:commandButton icon="fa fa-fw fa-edit" title="Editar Cadastro"
