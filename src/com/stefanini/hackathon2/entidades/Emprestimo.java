@@ -1,9 +1,10 @@
 package com.stefanini.hackathon2.entidades;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,24 +12,28 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.stefanini.hackathon2.managed.conversor.LocalDateAttributeConverter;
+
 @Entity
 public class Emprestimo {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idEmprestimo;
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "idLivro", nullable = true)
+	@ManyToOne(cascade = CascadeType.REFRESH)
+	@JoinColumn(name = "idLivro", nullable = false)
 	private Livro livro;
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "idPessoa", nullable = true)
+	@ManyToOne(cascade = CascadeType.REFRESH)
+	@JoinColumn(name = "idPessoa", nullable = false)
 	private Pessoa pessoa;
-	@Column(nullable = false)
+	@Column
 	private String status;
-	@Column(nullable = false)
-	private LocalDateTime dataRetirada;
-	@Column(nullable = false)
-	private LocalDateTime dataDevolucao;
+	@Column
+	@Convert(converter=LocalDateAttributeConverter.class)
+	private LocalDate dataRetirada;
+	@Column
+	@Convert(converter=LocalDateAttributeConverter.class)
+	private LocalDate dataDevolucao;
 
 	public Emprestimo() {
 	}
@@ -65,20 +70,20 @@ public class Emprestimo {
 		this.status = status;
 	}
 	
-	public LocalDateTime getDataRetirada() {
+	public LocalDate getDataRetirada() {
 		return dataRetirada;
 	}
 
-	public void setDataRetirada(LocalDateTime dataRetirada) {
+	public void setDataRetirada(LocalDate dataRetirada) {
 		this.dataRetirada = dataRetirada;
 	}
 
-	public LocalDateTime getDataDevolução() {
+	public LocalDate getDataDevolucao() {
 		return dataDevolucao;
 	}
 
-	public void setDataDevolução(LocalDateTime dataDevolução) {
-		this.dataDevolucao = dataDevolução;
+	public void setDataDevolucao(LocalDate dataDevolucao) {
+		this.dataDevolucao = dataDevolucao;
 	}
 
 	@Override

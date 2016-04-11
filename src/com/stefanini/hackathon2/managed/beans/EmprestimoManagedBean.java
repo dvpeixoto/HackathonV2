@@ -36,7 +36,7 @@ public class EmprestimoManagedBean {
 		carregaListaDeEmprestimos();
 		limpar();
 	}
-
+	
 	public void limpar() {
 		setEmprestimo(new Emprestimo());
 	}

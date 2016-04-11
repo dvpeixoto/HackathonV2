@@ -35,7 +35,7 @@ public class TransacionalInterceptor implements Serializable {
 			Mensageiro.nootificaErro("Erro - ",
 					"Detalhes do erro: " + e.getClass().getName() + " - " + e.getMessage());
 
-//			e.printStackTrace();
+			e.printStackTrace();
 		}
 
 		return resultado;

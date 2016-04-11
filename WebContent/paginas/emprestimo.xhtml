@@ -20,30 +20,33 @@
 				<h:form id="emprestimoForm">
 					<p:growl id="growl" showDetail="true" sticky="false" life="4000" />
 
-					<p:panelGrid columns="3">
+					<p:panelGrid columns="2">
 
-						<p:outputLabel for="nome" value="Nome:" />
-						<p:inputText id="nome" requiredMessage="Campo obrigatório"
-							required="true" value="#{pessoaManagedBean.pessoa.nome}" />
-						<p:message for="nome" />
+						<p:outputLabel for="idPessoa" value="Nome da Pessoa: " />
+						<p:selectOneMenu id="idPessoa" converter="conversorCombobox"
+							value="#{emprestimoManagedBean.emprestimo.pessoa}" effect="fold">
 
-						<p:outputLabel for="cpf" value="CPF:" />
-						<p:inputMask id="cpf" requiredMessage="Campo obrigatório"
-							mask="999.999.999-99" required="true"
-							value="#{pessoaManagedBean.pessoa.cpf}" />
-						<p:message for="cpf" />
+							<f:selectItem itemLabel="Selecione uma pessoa" itemValue="" />
 
-						<p:outputLabel for="buscarLivro" value="Titulo do Livro: " />
-						<p:selectOneMenu id="buscarLivro" value="#{livroManagedBean.listaDeLivrosCadastrados}"
-							effect="fold" editable="true">
-							<f:selectItem itemLabel="Select One" itemValue="livroManagedBean.livro.nome" />
-							<f:selectItems value="#{livroManagedBean.listaDeLivrosCadastrados}" />
+							<f:selectItems itemLabel="#{pessoa.nome}" itemValue="#{pessoa}"
+								var="pessoa"
+								value="#{pessoaManagedBean.listaDePessoasCadastradas}" />
+						</p:selectOneMenu>
+
+						<p:outputLabel for="idLivro" value="Titulo do Livro: " />
+						<p:selectOneMenu id="idLivro" converter="conversorCombobox"
+							value="#{emprestimoManagedBean.emprestimo.livro}" effect="fold">
+
+							<f:selectItem itemLabel="Selecione um livro" itemValue="" />
+
+							<f:selectItems itemLabel="#{livro.nome}" itemValue="#{livro}"
+								var="livro" value="#{livroManagedBean.listaDeLivrosCadastrados}" />
 						</p:selectOneMenu>
 
 
 					</p:panelGrid>
 
-					<p:commandButton value="Salvar" process="@form"
+					<p:commandButton value="Alugar" process="@form"
 						update="@form tabelaDeEmprestimos"
 						action="#{emprestimoManagedBean.salvar()}" icon="fa fa-fw fa-save" />
 					<p:commandButton value="Limpar" process="@this" update="@form"
@@ -79,6 +82,7 @@
 					<p:column headerText="Ações" style="text-align: center">
 						<p:commandButton icon="fa fa-fw fa-trash" title="Devolver Livro"
 							update="tabelaDeEmprestimos emprestimoForm"
+							rendered="#{emprestimo.status eq 'Alugado'}"
 							action="#{emprestimoManagedBean.devolver(emprestimo)}">
 							<p:confirm header="Confirmação"
 								message="Deseja devolver o Livro?" icon="ui-icon-alert" />
