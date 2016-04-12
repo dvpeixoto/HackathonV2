@@ -9,7 +9,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
+
 
 @Entity
 public class Livro {
@@ -23,7 +24,7 @@ public class Livro {
 	private String autor;
 	@Column(nullable=false)
 	private Integer paginas;
-	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	@ManyToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	@Column(name="idLivro")
 	private List<Emprestimo> listaEmprestimos;
 	

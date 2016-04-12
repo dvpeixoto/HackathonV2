@@ -22,9 +22,20 @@
 
 					<p:panelGrid columns="2">
 
+						<p:outputLabel for="idFuncionario" value="Nome do Funcionário: " />
+						<p:selectOneMenu id="idFuncionario" converter="conversorCombobox"
+							value="#{emprestimoManagedBean.emprestimo.funcionario}">
+
+							<f:selectItem itemLabel="Selecione um funcionário" itemValue="" />
+
+							<f:selectItems itemLabel="#{funcionario.nome}"
+								itemValue="#{funcionario}" var="funcionario"
+								value="#{funcionarioManagedBean.listaDeFuncionariosCadastrados}" />
+						</p:selectOneMenu>
+
 						<p:outputLabel for="idPessoa" value="Nome da Pessoa: " />
 						<p:selectOneMenu id="idPessoa" converter="conversorCombobox"
-							value="#{emprestimoManagedBean.emprestimo.pessoa}" >
+							value="#{emprestimoManagedBean.emprestimo.pessoa}">
 
 							<f:selectItem itemLabel="Selecione uma pessoa" itemValue="" />
 
@@ -33,18 +44,21 @@
 								value="#{pessoaManagedBean.listaDePessoasCadastradas}" />
 						</p:selectOneMenu>
 
-						<p:outputLabel for="idLivro" value="Titulo do Livro: " />
-						<p:selectOneMenu id="idLivro" converter="conversorCombobox"
-							value="#{emprestimoManagedBean.emprestimo.livro}" >
-
-							<f:selectItem itemLabel="Selecione um livro" itemValue="" />
-
-							<f:selectItems itemLabel="#{livro.nome}" itemValue="#{livro}"
-								var="livro" value="#{livroManagedBean.listaDeLivrosCadastrados}" />
-						</p:selectOneMenu>
-
+						<p:outputLabel for="btnModalLivro" value="livro" />
+						<p:panel>
+							<p:panelGrid columns="1">
+								<p:commandButton for="idLivro" value="Selecionar Livros" id="btnModalLivro"
+								oncomplete="PF('dialogLivro').show();" />
+								<ui:repeat var="livro" value="#{emprestimoManagedBean.emprestimo.livros}">
+									<p:outputLabel value="#{livro.nome}" />
+									<br></br>
+								</ui:repeat>
+							</p:panelGrid>
+						</p:panel>
 
 					</p:panelGrid>
+
+					<ui:include src="livro_listaSelection.xhtml" />
 
 					<p:commandButton value="Alugar" process="@form"
 						update="@form tabelaDeEmprestimos"
@@ -58,6 +72,9 @@
 					value="#{emprestimoManagedBean.listaDeEmprestimos}"
 					emptyMessage="Não existe emprestimos no banco"
 					style="padding-top:20px;">
+					<p:column headerText="Funcionário Responsável">
+						<h:outputText value="#{emprestimo.funcionario.nome}" />
+					</p:column>
 					<p:column headerText="Id">
 						<h:outputText value="#{emprestimo.idEmprestimo}" />
 					</p:column>
@@ -74,13 +91,15 @@
 						<h:outputText value="#{emprestimo.status}" />
 					</p:column>
 					<p:column headerText="Data da Retirada">
-						<h:outputText converter="conversorDataFormatada" value="#{emprestimo.dataRetirada}"/>
+						<h:outputText converter="conversorDataFormatada"
+							value="#{emprestimo.dataRetirada}" />
 					</p:column>
 					<p:column headerText="Data da Devolução">
-						<h:outputText converter="conversorDataFormatada" value="#{emprestimo.dataDevolucao}"/>
+						<h:outputText converter="conversorDataFormatada"
+							value="#{emprestimo.dataDevolucao}" />
 					</p:column>
 					<p:column headerText="Dias em Atraso">
-						<h:outputText value="#{emprestimo.diasAtrasados}"/>
+						<h:outputText value="#{emprestimo.diasAtrasados}" />
 					</p:column>
 					<p:column headerText="Ações" style="text-align: center">
 						<p:commandButton icon="fa fa-fw fa-book" title="Devolver Livro"

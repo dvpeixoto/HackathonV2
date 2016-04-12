@@ -1,6 +1,7 @@
 package com.stefanini.hackathon2.entidades;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 import com.stefanini.hackathon2.managed.conversor.LocalDateAttributeConverter;
@@ -20,12 +22,15 @@ public class Emprestimo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idEmprestimo;
-	@ManyToOne(cascade = CascadeType.REFRESH)
+	@ManyToMany(cascade = CascadeType.REFRESH)
 	@JoinColumn(name = "idLivro", nullable = false)
-	private Livro livro;
+	private List<Livro> livros;
 	@ManyToOne(cascade = CascadeType.REFRESH)
 	@JoinColumn(name = "idPessoa", nullable = false)
 	private Pessoa pessoa;
+	@ManyToOne(cascade = CascadeType.REFRESH)
+	@JoinColumn(name = "idFuncionario", nullable = false)
+	private Funcionario funcionario;
 	@Column
 	private String status;
 	@Column
@@ -48,12 +53,12 @@ public class Emprestimo {
 		this.idEmprestimo = id;
 	}
 
-	public Livro getLivro() {
-		return livro;
+	public List<Livro> getLivros() {
+		return livros;
 	}
 
-	public void setLivro(Livro livro) {
-		this.livro = livro;
+	public void setLivros(List<Livro> livros) {
+		this.livros = livros;
 	}
 
 	public Pessoa getPessoa() {
@@ -62,6 +67,14 @@ public class Emprestimo {
 
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
+	}
+
+	public Funcionario getFuncionario() {
+		return funcionario;
+	}
+
+	public void setFuncionario(Funcionario funcionario) {
+		this.funcionario = funcionario;
 	}
 
 	public String getStatus() {
@@ -103,8 +116,9 @@ public class Emprestimo {
 		result = prime * result + ((dataDevolucao == null) ? 0 : dataDevolucao.hashCode());
 		result = prime * result + ((dataRetirada == null) ? 0 : dataRetirada.hashCode());
 		result = prime * result + ((diasAtrasados == null) ? 0 : diasAtrasados.hashCode());
+		result = prime * result + ((funcionario == null) ? 0 : funcionario.hashCode());
 		result = prime * result + ((idEmprestimo == null) ? 0 : idEmprestimo.hashCode());
-		result = prime * result + ((livro == null) ? 0 : livro.hashCode());
+		result = prime * result + ((livros == null) ? 0 : livros.hashCode());
 		result = prime * result + ((pessoa == null) ? 0 : pessoa.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		return result;
@@ -134,15 +148,20 @@ public class Emprestimo {
 				return false;
 		} else if (!diasAtrasados.equals(other.diasAtrasados))
 			return false;
+		if (funcionario == null) {
+			if (other.funcionario != null)
+				return false;
+		} else if (!funcionario.equals(other.funcionario))
+			return false;
 		if (idEmprestimo == null) {
 			if (other.idEmprestimo != null)
 				return false;
 		} else if (!idEmprestimo.equals(other.idEmprestimo))
 			return false;
-		if (livro == null) {
-			if (other.livro != null)
+		if (livros == null) {
+			if (other.livros != null)
 				return false;
-		} else if (!livro.equals(other.livro))
+		} else if (!livros.equals(other.livros))
 			return false;
 		if (pessoa == null) {
 			if (other.pessoa != null)
