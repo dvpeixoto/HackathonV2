@@ -24,7 +24,7 @@
 
 						<p:outputLabel for="idPessoa" value="Nome da Pessoa: " />
 						<p:selectOneMenu id="idPessoa" converter="conversorCombobox"
-							value="#{emprestimoManagedBean.emprestimo.pessoa}" effect="fold">
+							value="#{emprestimoManagedBean.emprestimo.pessoa}" >
 
 							<f:selectItem itemLabel="Selecione uma pessoa" itemValue="" />
 
@@ -35,7 +35,7 @@
 
 						<p:outputLabel for="idLivro" value="Titulo do Livro: " />
 						<p:selectOneMenu id="idLivro" converter="conversorCombobox"
-							value="#{emprestimoManagedBean.emprestimo.livro}" effect="fold">
+							value="#{emprestimoManagedBean.emprestimo.livro}" >
 
 							<f:selectItem itemLabel="Selecione um livro" itemValue="" />
 
@@ -74,10 +74,13 @@
 						<h:outputText value="#{emprestimo.status}" />
 					</p:column>
 					<p:column headerText="Data da Retirada">
-						<h:outputText value="#{emprestimo.dataRetirada}" />
+						<h:outputText converter="conversorDataFormatada" value="#{emprestimo.dataRetirada}"/>
 					</p:column>
 					<p:column headerText="Data da Devolução">
-						<h:outputText value="#{emprestimo.dataDevolucao}" />
+						<h:outputText converter="conversorDataFormatada" value="#{emprestimo.dataDevolucao}"/>
+					</p:column>
+					<p:column headerText="Dias em Atraso">
+						<h:outputText value="#{emprestimo.diasAtrasados}"/>
 					</p:column>
 					<p:column headerText="Ações" style="text-align: center">
 						<p:commandButton icon="fa fa-fw fa-book" title="Devolver Livro"

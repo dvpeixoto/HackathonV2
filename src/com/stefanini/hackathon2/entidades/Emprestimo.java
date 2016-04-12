@@ -1,6 +1,6 @@
 package com.stefanini.hackathon2.entidades;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -29,11 +29,13 @@ public class Emprestimo {
 	@Column
 	private String status;
 	@Column
-	@Convert(converter=LocalDateAttributeConverter.class)
-	private LocalDate dataRetirada;
+	@Convert(converter = LocalDateAttributeConverter.class)
+	private LocalDateTime dataRetirada;
 	@Column
-	@Convert(converter=LocalDateAttributeConverter.class)
-	private LocalDate dataDevolucao;
+	@Convert(converter = LocalDateAttributeConverter.class)
+	private LocalDateTime dataDevolucao;
+	@Column
+	private Integer diasAtrasados;
 
 	public Emprestimo() {
 	}
@@ -69,20 +71,28 @@ public class Emprestimo {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
-	public LocalDate getDataRetirada() {
+
+	public Integer getDiasAtrasados() {
+		return diasAtrasados;
+	}
+
+	public void setDiasAtrasados(Integer diasAtrasados) {
+		this.diasAtrasados = diasAtrasados;
+	}
+
+	public LocalDateTime getDataRetirada() {
 		return dataRetirada;
 	}
 
-	public void setDataRetirada(LocalDate dataRetirada) {
+	public void setDataRetirada(LocalDateTime dataRetirada) {
 		this.dataRetirada = dataRetirada;
 	}
 
-	public LocalDate getDataDevolucao() {
+	public LocalDateTime getDataDevolucao() {
 		return dataDevolucao;
 	}
 
-	public void setDataDevolucao(LocalDate dataDevolucao) {
+	public void setDataDevolucao(LocalDateTime dataDevolucao) {
 		this.dataDevolucao = dataDevolucao;
 	}
 
@@ -92,6 +102,7 @@ public class Emprestimo {
 		int result = 1;
 		result = prime * result + ((dataDevolucao == null) ? 0 : dataDevolucao.hashCode());
 		result = prime * result + ((dataRetirada == null) ? 0 : dataRetirada.hashCode());
+		result = prime * result + ((diasAtrasados == null) ? 0 : diasAtrasados.hashCode());
 		result = prime * result + ((idEmprestimo == null) ? 0 : idEmprestimo.hashCode());
 		result = prime * result + ((livro == null) ? 0 : livro.hashCode());
 		result = prime * result + ((pessoa == null) ? 0 : pessoa.hashCode());
@@ -118,6 +129,11 @@ public class Emprestimo {
 				return false;
 		} else if (!dataRetirada.equals(other.dataRetirada))
 			return false;
+		if (diasAtrasados == null) {
+			if (other.diasAtrasados != null)
+				return false;
+		} else if (!diasAtrasados.equals(other.diasAtrasados))
+			return false;
 		if (idEmprestimo == null) {
 			if (other.idEmprestimo != null)
 				return false;
@@ -140,5 +156,5 @@ public class Emprestimo {
 			return false;
 		return true;
 	}
-	
+
 }

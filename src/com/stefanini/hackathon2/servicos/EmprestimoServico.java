@@ -1,8 +1,9 @@
 package com.stefanini.hackathon2.servicos;
 
-import java.time.LocalDate;
-
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.List;
+
 import javax.inject.Inject;
 
 import com.stefanini.hackathon2.entidades.Emprestimo;
@@ -19,7 +20,7 @@ public class EmprestimoServico {
 		if (emprestimo.getIdEmprestimo() == null) {
 			if (emprestimo.getStatus() == null) {
 				emprestimo.setStatus("Alugado");
-				emprestimo.setDataRetirada(LocalDate.now());
+				emprestimo.setDataRetirada(LocalDateTime.now());
 				repositorio.inserir(emprestimo);
 			} else {
 				repositorio.atualizar(emprestimo);
@@ -34,11 +35,17 @@ public class EmprestimoServico {
 
 	@Transacional
 	public void devolver(Emprestimo emprestimo) {
-		if (!emprestimo.getStatus().equals(null)) {
+		if (emprestimo.getStatus() != null) {
 			emprestimo.setStatus(null);
-			emprestimo.setDataDevolucao(LocalDate.now());
-			repositorio.devolver(emprestimo);
+			emprestimo.setDataDevolucao(LocalDateTime.now());
+			Duration dur = Duration.between(emprestimo.getDataRetirada(), emprestimo.getDataDevolucao());
+			if (dur.toDays() > 4) {
+				emprestimo.setDiasAtrasados((int) dur.toDays()-4);
+				repositorio.devolver(emprestimo);
+			} else {
+				emprestimo.setDiasAtrasados(0);
+				repositorio.devolver(emprestimo);
+			}
 		}
 	}
-
 }
