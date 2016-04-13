@@ -4,20 +4,20 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://java.sun.com/jsf/core" id="modalLivroId"
-	widgetVar="dialogLivro" modal="false" appendToBody="true" resizable="false"
-	header="Selecione os livros" closable="true">
+	widgetVar="dialogLivro" modal="false" appendToBody="true"
+	resizable="false" header="Selecione os livros" closable="true">
 
 	<div style="height: 200px; width: 550px; overflow: auto;">
 		<p:dataTable selection="#{emprestimoManagedBean.emprestimo.livros}"
-			rowKey="#{livro.idLivro}"
-			 id="tabelaModalDeLivros" var="livro"
+			rowKey="#{livro.idLivro}" id="tabelaModalDeLivros" var="livro"
 			value="#{livroManagedBean.listaDeLivrosCadastrados}"
 			emptyMessage="Não existem livros cadastrados"
 			style="padding-top:20px;">
-			
-			<f:facet name="header"/>
-        	<p:column selectionMode="multiple" style="width:16px;text-align:center"/>
-			
+
+			<f:facet name="header" />
+			<p:column selectionMode="multiple"
+				style="width:16px;text-align:center" />
+
 			<p:column headerText="Id">
 				<h:outputText value="#{livro.idLivro}" />
 			</p:column>
@@ -30,14 +30,17 @@
 			<p:column headerText="Páginas">
 				<h:outputText value="#{livro.paginas}" />
 			</p:column>
-			
+			<p:column headerText="Quantidade em estoque">
+				<h:outputText value="#{livro.quantidadeEstoque}" />
+			</p:column>
+
 			<f:facet name="footer">
-			<p:commandButton value="Selecionar" oncomplete="PF('dialogLivro').close();"
-				update="emprestimoForm" icon="ui-icon-search" process="tabelaModalDeLivros"  
-				/>
-        </f:facet>
+				<p:commandButton value="Selecionar"
+					oncomplete="PF('dialogLivro').close" update="emprestimoForm"
+					icon="ui-icon-search" process="tabelaModalDeLivros" />
+			</f:facet>
 		</p:dataTable>
-		
+
 	</div>
 
 </p:dialog>

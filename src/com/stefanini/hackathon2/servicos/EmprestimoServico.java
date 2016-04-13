@@ -7,6 +7,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import com.stefanini.hackathon2.entidades.Emprestimo;
+import com.stefanini.hackathon2.entidades.Livro;
 import com.stefanini.hackathon2.repositorios.EmprestimoRepositorio;
 import com.stefanini.hackathon2.transacao.Transacional;
 
@@ -19,11 +20,18 @@ public class EmprestimoServico {
 	public void salvar(Emprestimo emprestimo) {
 		if (emprestimo.getIdEmprestimo() == null) {
 			if (emprestimo.getStatus() == null) {
-				emprestimo.setStatus("Alugado");
-				emprestimo.setDataRetirada(LocalDateTime.now());
-				repositorio.inserir(emprestimo);
-			} else {
-				repositorio.atualizar(emprestimo);
+				for (Livro livroVerificaEstoque : emprestimo.getLivros()) {
+					if (livroVerificaEstoque.getQuantidadeEstoque() <= 2) {
+						System.out.println("não rolou");
+					} else {
+						for (Livro livroDiminuirEstoque : emprestimo.getLivros()) {
+							livroDiminuirEstoque.setQuantidadeEstoque(livroDiminuirEstoque.getQuantidadeEstoque() - 1);
+						}
+						emprestimo.setStatus("Alugado");
+						emprestimo.setDataRetirada(LocalDateTime.now());
+						repositorio.inserir(emprestimo);
+					}
+				}
 			}
 		}
 	}
@@ -39,8 +47,11 @@ public class EmprestimoServico {
 			emprestimo.setStatus(null);
 			emprestimo.setDataDevolucao(LocalDateTime.now());
 			Duration dur = Duration.between(emprestimo.getDataRetirada(), emprestimo.getDataDevolucao());
-			if (dur.toDays() > 4) {
-				emprestimo.setDiasAtrasados((int) dur.toDays()-4);
+			for (Livro livroAtribuirEstoque : emprestimo.getLivros()) {
+				livroAtribuirEstoque.setQuantidadeEstoque(livroAtribuirEstoque.getQuantidadeEstoque() + 1);
+			}
+			if (dur.toDays() > 7) {
+				emprestimo.setDiasAtrasados((int) dur.toDays() - 7);
 				repositorio.devolver(emprestimo);
 			} else {
 				emprestimo.setDiasAtrasados(0);

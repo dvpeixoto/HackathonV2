@@ -13,49 +13,61 @@
 		<p:layout>
 			<p:layoutUnit position="north" style="text-align: center;">
 				<p:outputLabel style="font-size: 20px;"
-					value="Manutenção de Cadastros de Funcionários"/>
+					value="Manutenção de Cadastros de Funcionários" />
 			</p:layoutUnit>
 			<p:layoutUnit position="center">
 
 				<h:form id="funcionarioForm">
-					<p:growl id="growl" showDetail="true" sticky="false" life="4000"/>
+					<p:growl id="growl" showDetail="true" sticky="false" life="4000" />
 
 					<p:panelGrid columns="3">
 
 						<p:outputLabel for="nome" value="Nome:" />
-						<p:inputText id="nome" placeholder="Nome" requiredMessage="Campo obrigatório"
-							required="true" value="#{funcionarioManagedBean.funcionario.nome}" />
+						<p:inputText id="nome" placeholder="Nome"
+							requiredMessage="Campo obrigatório" required="true"
+							value="#{funcionarioManagedBean.funcionario.nome}" />
 						<p:message for="nome" />
 
 						<p:outputLabel for="cpf" value="CPF:" />
-						<p:inputMask id="cpf" placeholder="CPF" requiredMessage="Campo obrigatório"
-							mask="999.999.999-99" required="true"
-							value="#{funcionarioManagedBean.funcionario.cpf}" />
+						<p:inputMask id="cpf" placeholder="CPF"
+							requiredMessage="Campo obrigatório" mask="999.999.999-99"
+							required="true" value="#{funcionarioManagedBean.funcionario.cpf}" />
 						<p:message for="cpf" />
 
 						<p:outputLabel for="telefone" value="Telefone:" />
 						<p:inputMask maxlength="16" id="telefone" placeholder="Telefone"
-							requiredMessage="Campo obrigatório" mask="(99) 9999-9999" 
-							required="true" value="#{funcionarioManagedBean.funcionario.telefone}" />
+							requiredMessage="Campo obrigatório" mask="(99) 9999-9999"
+							required="true"
+							value="#{funcionarioManagedBean.funcionario.telefone}" />
 						<p:message for="telefone" />
 
 						<p:outputLabel for="endereco" value="Endereço:" />
-						<p:inputText id="endereco" placeholder="Endereço" requiredMessage="Campo obrigatório"
-							required="true" value="#{funcionarioManagedBean.funcionario.endereco}" />
+						<p:inputText id="endereco" placeholder="Endereço"
+							requiredMessage="Campo obrigatório" required="true"
+							value="#{funcionarioManagedBean.funcionario.endereco}" />
 						<p:message for="endereco" />
 
+						<p:outputLabel for="email" value="E-mail:" />
+						<p:inputText id="email" placeholder="E-mail"
+							requiredMessage="Campo obrigatório" required="true"
+							value="#{funcionarioManagedBean.funcionario.email}" />
+						<p:message for="email" />
+
 						<p:outputLabel for="salario" value="Salário:" />
-						<p:inputText id="salario" placeholder="Salário" requiredMessage="Campo obrigatório"
-							required="true" value="#{funcionarioManagedBean.funcionario.salario}"/>
+						<p:inputText id="salario" placeholder="Salário"
+							requiredMessage="Campo obrigatório" required="true"
+							value="#{funcionarioManagedBean.funcionario.salario}" />
 						<p:message for="salario" />
 
 					</p:panelGrid>
 
 					<p:commandButton value="Salvar" process="@form"
 						update="@form tabelaDeFuncionarios"
-						action="#{funcionarioManagedBean.salvar()}" icon="fa fa-fw fa-save" />
+						action="#{funcionarioManagedBean.salvar()}"
+						icon="fa fa-fw fa-save" />
 					<p:commandButton value="Limpar" process="@this" update="@form"
-						action="#{funcionarioManagedBean.limpar()}" icon="fa fa-fw fa-eraser" />
+						action="#{funcionarioManagedBean.limpar()}"
+						icon="fa fa-fw fa-eraser" />
 				</h:form>
 
 				<p:dataTable id="tabelaDeFuncionarios" var="funcionario"
@@ -77,8 +89,12 @@
 					<p:column headerText="Endereço">
 						<h:outputText value="#{funcionario.endereco}" />
 					</p:column>
+					<p:column headerText="E-mail">
+						<h:outputText value="#{funcionario.email}" />
+					</p:column>
 					<p:column headerText="Salário">
-						<h:outputText converter="conversorSalario" value="#{funcionario.salario}" />
+						<h:outputText converter="conversorSalario"
+							value="#{funcionario.salario}" />
 					</p:column>
 					<p:column headerText="Ações" style="text-align: center">
 						<p:commandButton icon="fa fa-fw fa-edit" title="Editar Cadastro"

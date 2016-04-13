@@ -26,6 +26,8 @@ public class Funcionario {
 	@Column(nullable = false)
 	private String endereco;
 	@Column(nullable = false)
+	private String email;
+	@Column(nullable = false)
 	private Double salario;
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@Column(name = "idFuncionario")
@@ -74,6 +76,14 @@ public class Funcionario {
 		this.endereco = endereco;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public Double getSalario() {
 		return salario;
 	}
@@ -95,6 +105,7 @@ public class Funcionario {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((endereco == null) ? 0 : endereco.hashCode());
 		result = prime * result + ((idFuncionario == null) ? 0 : idFuncionario.hashCode());
 		result = prime * result + ((listaEmprestimos == null) ? 0 : listaEmprestimos.hashCode());
@@ -117,6 +128,11 @@ public class Funcionario {
 			if (other.cpf != null)
 				return false;
 		} else if (!cpf.equals(other.cpf))
+			return false;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
 			return false;
 		if (endereco == null) {
 			if (other.endereco != null)

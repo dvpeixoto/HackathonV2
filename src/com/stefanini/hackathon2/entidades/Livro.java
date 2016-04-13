@@ -1,33 +1,31 @@
 package com.stefanini.hackathon2.entidades;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
+import java.sql.Blob;
+import java.sql.SQLException;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-
+import javax.swing.ImageIcon;
 
 @Entity
 public class Livro {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idLivro;
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private String nome;
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private String autor;
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private Integer paginas;
-	@ManyToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
-	@Column(name="idLivro")
-	private List<Emprestimo> listaEmprestimos;
-	
+	@Column(nullable = false)
+	private Integer quantidadeEstoque;
+	@Column(nullable = true)
+	private Blob foto;
+
 	public Livro() {
 	}
 
@@ -62,13 +60,27 @@ public class Livro {
 	public void setPaginas(Integer paginas) {
 		this.paginas = paginas;
 	}
-	
-	public List<Emprestimo> getListaEmprestimos() {
-		return listaEmprestimos;
+
+	public Integer getQuantidadeEstoque() {
+		return quantidadeEstoque;
 	}
 
-	public void setListaEmprestimos(List<Emprestimo> listaEmprestimos) {
-		this.listaEmprestimos = listaEmprestimos;
+	public void setQuantidadeEstoque(Integer quantidadeEstoque) {
+		this.quantidadeEstoque = quantidadeEstoque;
+	}
+
+	public Blob getFoto() {
+		return foto;
+	}
+
+	public void setFoto(Blob foto) {
+		this.foto = foto;
+	}
+
+	public ImageIcon mostrarFoto() throws SQLException {
+		Blob blob = getFoto();
+		ImageIcon imageIcon = new ImageIcon(blob.getBytes(1, (int) blob.length()));
+		return imageIcon;
 	}
 
 	@Override
@@ -77,9 +89,9 @@ public class Livro {
 		int result = 1;
 		result = prime * result + ((autor == null) ? 0 : autor.hashCode());
 		result = prime * result + ((idLivro == null) ? 0 : idLivro.hashCode());
-		result = prime * result + ((listaEmprestimos == null) ? 0 : listaEmprestimos.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((paginas == null) ? 0 : paginas.hashCode());
+		result = prime * result + ((quantidadeEstoque == null) ? 0 : quantidadeEstoque.hashCode());
 		return result;
 	}
 
@@ -102,11 +114,6 @@ public class Livro {
 				return false;
 		} else if (!idLivro.equals(other.idLivro))
 			return false;
-		if (listaEmprestimos == null) {
-			if (other.listaEmprestimos != null)
-				return false;
-		} else if (!listaEmprestimos.equals(other.listaEmprestimos))
-			return false;
 		if (nome == null) {
 			if (other.nome != null)
 				return false;
@@ -117,7 +124,12 @@ public class Livro {
 				return false;
 		} else if (!paginas.equals(other.paginas))
 			return false;
+		if (quantidadeEstoque == null) {
+			if (other.quantidadeEstoque != null)
+				return false;
+		} else if (!quantidadeEstoque.equals(other.quantidadeEstoque))
+			return false;
 		return true;
 	}
-	
+
 }

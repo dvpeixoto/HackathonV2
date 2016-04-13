@@ -1,15 +1,10 @@
 package com.stefanini.hackathon2.entidades;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Pessoa {
@@ -26,12 +21,11 @@ public class Pessoa {
 	@Column(nullable = false)
 	private String endereco;
 	@Column(nullable = false)
+	private String email;
+	@Column(nullable = false)
 	private String usuario;
 	@Column(nullable = false)
 	private String senha;
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@Column(name = "idPessoa")
-	private List<Emprestimo> listaEmprestimos;
 
 	public Pessoa() {
 	}
@@ -76,6 +70,14 @@ public class Pessoa {
 		this.endereco = endereco;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public String getUsuario() {
 		return usuario;
 	}
@@ -92,22 +94,14 @@ public class Pessoa {
 		this.senha = senha;
 	}
 
-	public List<Emprestimo> getListaEmprestimos() {
-		return listaEmprestimos;
-	}
-
-	public void setListaEmprestimos(List<Emprestimo> listaEmprestimos) {
-		this.listaEmprestimos = listaEmprestimos;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((endereco == null) ? 0 : endereco.hashCode());
 		result = prime * result + ((idPessoa == null) ? 0 : idPessoa.hashCode());
-		result = prime * result + ((listaEmprestimos == null) ? 0 : listaEmprestimos.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((senha == null) ? 0 : senha.hashCode());
 		result = prime * result + ((telefone == null) ? 0 : telefone.hashCode());
@@ -129,6 +123,11 @@ public class Pessoa {
 				return false;
 		} else if (!cpf.equals(other.cpf))
 			return false;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
 		if (endereco == null) {
 			if (other.endereco != null)
 				return false;
@@ -138,11 +137,6 @@ public class Pessoa {
 			if (other.idPessoa != null)
 				return false;
 		} else if (!idPessoa.equals(other.idPessoa))
-			return false;
-		if (listaEmprestimos == null) {
-			if (other.listaEmprestimos != null)
-				return false;
-		} else if (!listaEmprestimos.equals(other.listaEmprestimos))
 			return false;
 		if (nome == null) {
 			if (other.nome != null)

@@ -44,12 +44,13 @@
 								value="#{pessoaManagedBean.listaDePessoasCadastradas}" />
 						</p:selectOneMenu>
 
-						<p:outputLabel for="btnModalLivro" value="livro" />
+						<p:outputLabel for="btnModalLivro" value="Titulo dos livros" />
 						<p:panel>
 							<p:panelGrid columns="1">
-								<p:commandButton for="idLivro" value="Selecionar Livros" id="btnModalLivro"
-								oncomplete="PF('dialogLivro').show();" />
-								<ui:repeat var="livro" value="#{emprestimoManagedBean.emprestimo.livros}">
+								<p:commandButton for="idLivro" value="Selecionar Livros"
+									id="btnModalLivro" oncomplete="PF('dialogLivro').show();" />
+								<ui:repeat id="listaLivros" var="livro"
+									value="#{emprestimoManagedBean.emprestimo.livros}">
 									<p:outputLabel value="#{livro.nome}" />
 									<br></br>
 								</ui:repeat>
@@ -60,7 +61,7 @@
 
 					<ui:include src="livro_listaSelection.xhtml" />
 
-					<p:commandButton value="Alugar" process="@form"
+					<p:commandButton value="Alugar" process="@form listaLivros"
 						update="@form tabelaDeEmprestimos"
 						action="#{emprestimoManagedBean.salvar()}" icon="fa fa-fw fa-save" />
 					<p:commandButton value="Limpar" process="@this" update="@form"
@@ -84,8 +85,15 @@
 					<p:column headerText="Telefone">
 						<h:outputText value="#{emprestimo.pessoa.telefone}" />
 					</p:column>
-					<p:column headerText="Titulo">
-						<h:outputText value="#{emprestimo.livro.nome}" />
+					<p:column headerText="E-mail">
+						<h:outputText value="#{emprestimo.pessoa.email}" />
+					</p:column>
+					<p:column headerText="Titulo do Livro">
+						<ui:repeat id="listaLivros" var="livro"
+							value="#{emprestimo.livros}" >
+						<p:outputLabel value="#{livro.nome}" />
+						<br></br>
+						</ui:repeat>
 					</p:column>
 					<p:column headerText="Status">
 						<h:outputText value="#{emprestimo.status}" />
