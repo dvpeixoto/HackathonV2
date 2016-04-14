@@ -1,15 +1,10 @@
 package com.stefanini.hackathon2.entidades;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Funcionario {
@@ -29,9 +24,10 @@ public class Funcionario {
 	private String email;
 	@Column(nullable = false)
 	private Double salario;
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@Column(name = "idFuncionario")
-	private List<Emprestimo> listaEmprestimos;
+	@Column(nullable = false)
+	private String usuario;
+	@Column(nullable = false)
+	private String senha;
 
 	public Funcionario() {
 	}
@@ -92,12 +88,20 @@ public class Funcionario {
 		this.salario = salario;
 	}
 
-	public List<Emprestimo> getListaEmprestimos() {
-		return listaEmprestimos;
+	public String getUsuario() {
+		return usuario;
 	}
 
-	public void setListaEmprestimos(List<Emprestimo> listaEmprestimos) {
-		this.listaEmprestimos = listaEmprestimos;
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 	@Override
@@ -108,10 +112,11 @@ public class Funcionario {
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((endereco == null) ? 0 : endereco.hashCode());
 		result = prime * result + ((idFuncionario == null) ? 0 : idFuncionario.hashCode());
-		result = prime * result + ((listaEmprestimos == null) ? 0 : listaEmprestimos.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((salario == null) ? 0 : salario.hashCode());
+		result = prime * result + ((senha == null) ? 0 : senha.hashCode());
 		result = prime * result + ((telefone == null) ? 0 : telefone.hashCode());
+		result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
 		return result;
 	}
 
@@ -144,11 +149,6 @@ public class Funcionario {
 				return false;
 		} else if (!idFuncionario.equals(other.idFuncionario))
 			return false;
-		if (listaEmprestimos == null) {
-			if (other.listaEmprestimos != null)
-				return false;
-		} else if (!listaEmprestimos.equals(other.listaEmprestimos))
-			return false;
 		if (nome == null) {
 			if (other.nome != null)
 				return false;
@@ -159,10 +159,20 @@ public class Funcionario {
 				return false;
 		} else if (!salario.equals(other.salario))
 			return false;
+		if (senha == null) {
+			if (other.senha != null)
+				return false;
+		} else if (!senha.equals(other.senha))
+			return false;
 		if (telefone == null) {
 			if (other.telefone != null)
 				return false;
 		} else if (!telefone.equals(other.telefone))
+			return false;
+		if (usuario == null) {
+			if (other.usuario != null)
+				return false;
+		} else if (!usuario.equals(other.usuario))
 			return false;
 		return true;
 	}

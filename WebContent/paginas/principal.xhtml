@@ -47,19 +47,19 @@
 		<div class="login-bottom">
 			<form>
 				<div class="text">
-					<h:inputText id="usuario" placeholder="Usuário" required="true" value="#{pessoaManagedBean.pessoa.usuario}" /> <span
+					<h:inputText id="usuario" placeholder="Usuário" required="true" value="#{login.usuario}" /> <span
 						class="men"></span>
 					<div class="clear"></div>
 				</div>
 				<div class="text">
-					<h:inputSecret type="password" placeholder="Senha..." required="true" value="#{pessoaManagedBean.pessoa.senha}" /> <span
+					<h:inputSecret type="password" placeholder="Senha..." required="true" value="#{login.senha}" /> <span
 						class="pass"></span>
 					<div class="clear"></div>
 				</div>
 
 				<div class="remember">
 					<div class="send">
-						<h:commandButton type="submit" value="Logar" action="#{pessoaManagedBean.pessoa.getUsuario}" />
+						<h:commandButton type="submit" value="Logar" action="#{login.entrar()}" />
 					</div>
 					<div class="clear"></div>
 				</div>

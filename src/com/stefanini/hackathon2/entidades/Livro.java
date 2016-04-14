@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.swing.ImageIcon;
 
 @Entity
@@ -23,6 +24,7 @@ public class Livro {
 	private Integer paginas;
 	@Column(nullable = false)
 	private Integer quantidadeEstoque;
+	@Lob
 	@Column(nullable = true)
 	private Blob foto;
 
