@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.stefanini.hackathon2.entidades.Login;
 
 @WebFilter(filterName = "FiltroFuncionarioJunior", description = "Filtro dedicado ao controle dos funcionário juniors e seus respectivos acessos", urlPatterns = {
-		"/paginas/principal.xhtml, /paginas/livro.xhtml" })
+		"/paginas/livro.xhtml" })
 public class FiltroFuncionarioJunior implements Filter {
 
 	@Inject

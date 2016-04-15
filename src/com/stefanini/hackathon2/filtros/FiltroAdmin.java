@@ -17,7 +17,7 @@ import com.stefanini.hackathon2.entidades.Login;
 
 @WebFilter(filterName = "FiltroAdmin", description = "Filtro dedicado ao controle do admin e seus respectivos acessos",
 urlPatterns = {"/paginas/emprestimo.xhtml, /paginas/pessoa.xhtml, /paginas/funcionario.xhtml, /paginas/livro.xhtml,"
-		+ "/paginas/principal.xhtml, /paginas/livro_listaSelection.xhtml"})
+		+ "/paginas/livro_listaSelection.xhtml, paginas/login.xhtml"})
 public class FiltroAdmin implements Filter {
 
 @Inject

@@ -17,7 +17,7 @@
 
 	<servlet-mapping>
 		<servlet-name>Faces Servlet</servlet-name>
-		<url-pattern>*.xhtml</url-pattern>
+		<url-pattern>paginas/principal.xhtml</url-pattern>
 	</servlet-mapping>
 	
 	<context-param>

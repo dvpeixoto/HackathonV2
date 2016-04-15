@@ -45,25 +45,26 @@
 		</h2>
 		<span class="log-close"> </span>
 		<div class="login-bottom">
-			<form>
+			<h:form>
 				<div class="text">
-					<h:inputText id="usuario" placeholder="Usuário" required="true" value="#{login.usuario}" /> <span
+					<h:inputText id="usuario" placeholder="Usuário" required="true" value="#{sessaoManagedBean.usuario}" /> <span
 						class="men"></span>
 					<div class="clear"></div>
 				</div>
 				<div class="text">
-					<h:inputSecret type="password" placeholder="Senha..." required="true" value="#{login.senha}" /> <span
+					<h:inputSecret type="password" placeholder="Senha..." required="true" value="#{sessaoManagedBean.senha}" /> <span
 						class="pass"></span>
 					<div class="clear"></div>
 				</div>
 
 				<div class="remember">
 					<div class="send">
-						<h:commandButton type="submit" value="Logar" action="#{login.entrar()}" />
+						<h:commandButton type="submit" value="Logar" action="#{sessaoManagedBean.entrar()}"/>
+						
 					</div>
 					<div class="clear"></div>
 				</div>
-			</form>
+			</h:form>
 		</div>
 	</div>
 

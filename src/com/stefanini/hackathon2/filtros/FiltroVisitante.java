@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.stefanini.hackathon2.entidades.Login;
 
 @WebFilter(filterName = "FiltroVisitante", description = "Filtro dedicado ao controle dos visitantes e seus respectivos acessos", urlPatterns = {
-		"/paginas/login.xhtml", "/paginas/cadastro.xhtml"})
+		"/paginas/cadastro.xhtml"})
 public class FiltroVisitante implements Filter {
 
 	@Inject

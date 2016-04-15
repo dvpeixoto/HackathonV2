@@ -24,10 +24,6 @@ public class Funcionario {
 	private String email;
 	@Column(nullable = false)
 	private Double salario;
-	@Column(nullable = false)
-	private String usuario;
-	@Column(nullable = false)
-	private String senha;
 
 	public Funcionario() {
 	}
@@ -88,22 +84,6 @@ public class Funcionario {
 		this.salario = salario;
 	}
 
-	public String getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
-	}
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -114,9 +94,7 @@ public class Funcionario {
 		result = prime * result + ((idFuncionario == null) ? 0 : idFuncionario.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((salario == null) ? 0 : salario.hashCode());
-		result = prime * result + ((senha == null) ? 0 : senha.hashCode());
 		result = prime * result + ((telefone == null) ? 0 : telefone.hashCode());
-		result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
 		return result;
 	}
 
@@ -159,20 +137,10 @@ public class Funcionario {
 				return false;
 		} else if (!salario.equals(other.salario))
 			return false;
-		if (senha == null) {
-			if (other.senha != null)
-				return false;
-		} else if (!senha.equals(other.senha))
-			return false;
 		if (telefone == null) {
 			if (other.telefone != null)
 				return false;
 		} else if (!telefone.equals(other.telefone))
-			return false;
-		if (usuario == null) {
-			if (other.usuario != null)
-				return false;
-		} else if (!usuario.equals(other.usuario))
 			return false;
 		return true;
 	}

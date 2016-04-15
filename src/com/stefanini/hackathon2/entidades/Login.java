@@ -7,7 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Login {
@@ -27,7 +27,7 @@ public class Login {
 	private Boolean pessoa;
 	@Column(nullable = true)
 	private Boolean livro;
-	@ManyToMany(cascade = CascadeType.REFRESH)
+	@OneToOne(cascade = CascadeType.REFRESH)
 	@JoinColumn(name = "idFuncionario", nullable = false)
 	private Funcionario funcionario;
 
@@ -164,17 +164,5 @@ public class Login {
 			return false;
 		return true;
 	}
-
-	// public String entrar() {
-	// for (Funcionario func : funcionarios) {
-	// if (func.getUsuario().equals(usuario) && func.getSenha().equals(senha)) {
-	// return "pessoa.xhtml?faces-redirect=true";
-	// }
-	// }
-	// FacesContext.getCurrentInstance().addMessage(null,
-	// new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuário e/ou senha
-	// inválidos.", null));
-	// return "principal.xhtml";
-	// }
 
 }

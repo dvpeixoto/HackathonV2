@@ -22,10 +22,6 @@ public class Pessoa {
 	private String endereco;
 	@Column(nullable = false)
 	private String email;
-	@Column(nullable = false)
-	private String usuario;
-	@Column(nullable = false)
-	private String senha;
 
 	public Pessoa() {
 	}
@@ -78,22 +74,6 @@ public class Pessoa {
 		this.email = email;
 	}
 
-	public String getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
-	}
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -103,9 +83,7 @@ public class Pessoa {
 		result = prime * result + ((endereco == null) ? 0 : endereco.hashCode());
 		result = prime * result + ((idPessoa == null) ? 0 : idPessoa.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		result = prime * result + ((senha == null) ? 0 : senha.hashCode());
 		result = prime * result + ((telefone == null) ? 0 : telefone.hashCode());
-		result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
 		return result;
 	}
 
@@ -143,20 +121,10 @@ public class Pessoa {
 				return false;
 		} else if (!nome.equals(other.nome))
 			return false;
-		if (senha == null) {
-			if (other.senha != null)
-				return false;
-		} else if (!senha.equals(other.senha))
-			return false;
 		if (telefone == null) {
 			if (other.telefone != null)
 				return false;
 		} else if (!telefone.equals(other.telefone))
-			return false;
-		if (usuario == null) {
-			if (other.usuario != null)
-				return false;
-		} else if (!usuario.equals(other.usuario))
 			return false;
 		return true;
 	}

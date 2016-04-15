@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.stefanini.hackathon2.entidades.Login;
 
 @WebFilter(filterName = "FiltroFuncionarioPleno", description = "Filtro dedicado ao controle dos funcionários plenos e seus respectivos acessos", urlPatterns = {
-		"/paginas/principal.xhtml, /paginas/livro_listaSelection.xhtml, /paginas/emprestimo.xhtml " })
+		"/paginas/livro_listaSelection.xhtml, /paginas/emprestimo.xhtml " })
 public class FiltroFuncionarioPleno implements Filter {
 
 	@Inject

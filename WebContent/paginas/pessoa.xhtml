@@ -52,29 +52,6 @@
 							value="#{pessoaManagedBean.pessoa.email}" />
 						<p:message for="email" />
 
-						<p:outputLabel for="usuario" value="Usuário:" />
-						<p:inputText id="usuario" placeholder="Usuário"
-							requiredMessage="Campo obrigatório" required="true"
-							value="#{pessoaManagedBean.pessoa.usuario}" />
-						<p:message for="usuario" />
-
-						<h:outputLabel for="senha1" value="Senha:" />
-						<p:password id="senha1" placeholder="Senha"
-							value="#{pessoaManagedBean.pessoa.senha}"
-							validatorMessage="Senhas devem ser iguais"
-							promptLabel="Use letras e números" weakLabel="Segurança fraca"
-							goodLabel="Segurança média" strongLabel="Segurança forte"
-							match="senha2" label="Senha: " required="true" feedback="true"
-							inline="true" />
-						<p:outputLabel />
-
-						<h:outputLabel for="senha2" value="Repita a senha:" />
-						<p:password id="senha2" placeholder="Repita a senha"
-							value="#{pessoaManagedBean.pessoa.senha}"
-							label="Repita a senha: " required="true" feedback="true"
-							inline="true" />
-						<p:outputLabel />
-
 					</p:panelGrid>
 
 					<p:commandButton value="Salvar" process="@form"
@@ -105,9 +82,6 @@
 					</p:column>
 					<p:column headerText="E-mail">
 						<h:outputText value="#{pessoa.email}" />
-					</p:column>
-					<p:column headerText="Usuário">
-						<h:outputText value="#{pessoa.usuario}" />
 					</p:column>
 					<p:column headerText="Ações" style="text-align: center">
 						<p:commandButton icon="fa fa-fw fa-edit" title="Editar Cadastro"
