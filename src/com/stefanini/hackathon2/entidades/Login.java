@@ -27,6 +27,8 @@ public class Login {
 	private Boolean pessoa;
 	@Column(nullable = true)
 	private Boolean livro;
+	@Column(nullable = true)
+	private Boolean logado;
 	@OneToOne(cascade = CascadeType.REFRESH)
 	@JoinColumn(name = "idFuncionario", nullable = false)
 	private Funcionario funcionario;
@@ -90,12 +92,20 @@ public class Login {
 		this.livro = livro;
 	}
 
-	public Funcionario getFuncionarios() {
+	public void setFuncionario(Funcionario funcionario) {
+		this.funcionario = funcionario;
+	}
+
+	public Funcionario getFuncionario() {
 		return funcionario;
 	}
 
-	public void setFuncionario(Funcionario funcionario) {
-		this.funcionario = funcionario;
+	public Boolean getLogado() {
+		return logado;
+	}
+
+	public void setLogado(Boolean logado) {
+		this.logado = logado;
 	}
 
 	@Override
@@ -107,6 +117,7 @@ public class Login {
 		result = prime * result + ((funcionario == null) ? 0 : funcionario.hashCode());
 		result = prime * result + ((idLogin == null) ? 0 : idLogin.hashCode());
 		result = prime * result + ((livro == null) ? 0 : livro.hashCode());
+		result = prime * result + ((logado == null) ? 0 : logado.hashCode());
 		result = prime * result + ((pessoa == null) ? 0 : pessoa.hashCode());
 		result = prime * result + ((senha == null) ? 0 : senha.hashCode());
 		result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
@@ -146,6 +157,11 @@ public class Login {
 			if (other.livro != null)
 				return false;
 		} else if (!livro.equals(other.livro))
+			return false;
+		if (logado == null) {
+			if (other.logado != null)
+				return false;
+		} else if (!logado.equals(other.logado))
 			return false;
 		if (pessoa == null) {
 			if (other.pessoa != null)

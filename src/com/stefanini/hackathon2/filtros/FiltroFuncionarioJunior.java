@@ -34,10 +34,9 @@ public class FiltroFuncionarioJunior implements Filter {
 
 		if (session == null) {
 			resp.sendRedirect(req.getServletContext().getContextPath() + "/paginas/principal.xhtml");
-		} else if (session.getLivro() == true) {
+		} else if (session.getLivro() == true && session.getEmprestimo() == false && session.getPessoa() == false
+				&& session.getAdmin() == false) {
 			chain.doFilter(request, response);
-		} else {
-			resp.sendRedirect(req.getServletContext().getContextPath() + "/paginas/principal.xhtml");
 		}
 	}
 

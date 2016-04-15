@@ -1,5 +1,6 @@
 package com.stefanini.hackathon2.managed.beans;
 
+import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -10,7 +11,7 @@ import javax.inject.Inject;
 import com.stefanini.hackathon2.entidades.Login;
 import com.stefanini.hackathon2.servicos.LoginServico;
 
-@ManagedBean
+@ManagedBean(eager = true)
 @SessionScoped
 public class SessaoManagedBean {
 
@@ -50,13 +51,15 @@ public class SessaoManagedBean {
 	}
 
 	public String entrar() {
-		for (Login loginDoBanco : servico.carregaTodosLoginsDoBanco()) {
+		List<Login> listaLoginsDoBanco = servico.carregaTodosLoginsDoBanco();
+		for (Login loginDoBanco : listaLoginsDoBanco) {
 			if (loginDoBanco.getUsuario().equals(usuario) && loginDoBanco.getSenha().equals(senha)) {
 				this.login = loginDoBanco;
-				if (login.getAdmin()) {
+				login.setLogado(true);
+				if (login.getAdmin() == true) {
 					return "funcionario.xhtml?faces-redirect=true";
 				}
-				if (login.getEmprestimo()) {
+				if (login.getEmprestimo() == true) {
 					return "emprestimo.xhtml?faces-redirect=true";
 				} else {
 					return "livro.xhtml?faces-redirect=true";
@@ -65,6 +68,12 @@ public class SessaoManagedBean {
 		}
 		FacesContext.getCurrentInstance().addMessage(null,
 				new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuário e/ou senha inválidos.", null));
+		return "principal.xhtml?faces-redirect=true";
+	}
+
+	public String sair() {
+		FacesContext contexto = FacesContext.getCurrentInstance();
+		contexto.getExternalContext().invalidateSession();
 		return "principal.xhtml?faces-redirect=true";
 	}
 

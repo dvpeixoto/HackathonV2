@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.stefanini.hackathon2.entidades.Login;
 
 @WebFilter(filterName = "FiltroVisitante", description = "Filtro dedicado ao controle dos visitantes e seus respectivos acessos", urlPatterns = {
-		"/paginas/cadastro.xhtml"})
+		"/paginas/pessoa.xhtml" })
 public class FiltroVisitante implements Filter {
 
 	@Inject
@@ -34,9 +34,10 @@ public class FiltroVisitante implements Filter {
 
 		if (session == null) {
 			resp.sendRedirect(req.getServletContext().getContextPath() + "/paginas/principal.xhtml");
-		} else {
+		} else if (session.getLogado() == null) {
+			resp.sendRedirect(req.getServletContext().getContextPath() + "/paginas/principal.xhtml");
 			chain.doFilter(request, response);
-		}
+		} 
 	}
 
 	@Override
