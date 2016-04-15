@@ -2,6 +2,7 @@ package com.stefanini.hackathon2.filtros;
 
 import java.io.IOException;
 
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -13,7 +14,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.stefanini.hackathon2.entidades.Login;
+import com.stefanini.hackathon2.managed.beans.SessaoManagedBean;
 
 @WebFilter(filterName = "FiltroAdmin", description = "Filtro dedicado ao controle do admin e seus respectivos acessos", urlPatterns = {
 		"/paginas/emprestimo.xhtml, /paginas/pessoa.xhtml, /paginas/funcionario.xhtml, /paginas/livro.xhtml,"
@@ -21,7 +22,7 @@ import com.stefanini.hackathon2.entidades.Login;
 public class FiltroAdmin implements Filter {
 
 	@Inject
-	private Login session;
+	private SessaoManagedBean session;
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
@@ -32,11 +33,12 @@ public class FiltroAdmin implements Filter {
 			throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse resp = (HttpServletResponse) response;
-
+		session = (SessaoManagedBean)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("login");
+		
 		if (session == null) {
 			resp.sendRedirect(req.getServletContext().getContextPath() + "/paginas/principal.xhtml");
-		} else if (session.getLogado()) {
-			if (session.getAdmin() == true) {
+		} else if (session.getLogin().getLogado()) {
+			if (session.getLogin().getAdmin() == true) {
 				chain.doFilter(request, response);
 			}
 		}
