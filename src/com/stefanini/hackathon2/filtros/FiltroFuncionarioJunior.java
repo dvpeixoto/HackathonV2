@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.stefanini.hackathon2.entidades.Login;
 
 @WebFilter(filterName = "FiltroFuncionarioJunior", description = "Filtro dedicado ao controle dos funcionário juniors e seus respectivos acessos", urlPatterns = {
-		"/paginas/livro.xhtml" })
+		"/livro.xhtml" })
 public class FiltroFuncionarioJunior implements Filter {
 
 	@Inject
@@ -30,13 +30,15 @@ public class FiltroFuncionarioJunior implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;
-		HttpServletResponse resp = (HttpServletResponse) response;
-
+		HttpServletResponse resp = (HttpServletResponse) response;        
+        
 		if (session == null) {
 			resp.sendRedirect(req.getServletContext().getContextPath() + "/paginas/principal.xhtml");
-		} else if (session.getLivro() == true && session.getEmprestimo() == false && session.getPessoa() == false
-				&& session.getAdmin() == false) {
-			chain.doFilter(request, response);
+		} else if (session.getLogado()) {
+			if (session.getLivro() == true && session.getEmprestimo() == false && session.getPessoa() == false
+					&& session.getAdmin() == false) {
+				chain.doFilter(request, response);
+			}
 		}
 	}
 

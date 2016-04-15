@@ -19,10 +19,55 @@
 		<servlet-name>Faces Servlet</servlet-name>
 		<url-pattern>*.xhtml</url-pattern>
 	</servlet-mapping>
+
+	<filter>
+		<filter-name>FiltroAdmin</filter-name>
+		<filter-class>com.stefanini.hackathon2.filtros.FiltroAdmin</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>FiltroAdmin</filter-name>
+		<url-pattern>/restricted/*</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>FiltroFuncionarioJunior</filter-name>
+		<filter-class>com.stefanini.hackathon2.filtros.FiltroFuncionarioJunior</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>FiltroFuncionarioJunior</filter-name>
+		<url-pattern>/restricted/*</url-pattern>
+	</filter-mapping>
 	
+		<filter>
+		<filter-name>FiltroFuncionarioPleno</filter-name>
+		<filter-class>com.stefanini.hackathon2.filtros.FiltroFuncionarioPleno</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>FiltroFuncionarioPleno</filter-name>
+		<url-pattern>/restricted/*</url-pattern>
+	</filter-mapping>
+	
+		<filter>
+		<filter-name>FiltroFuncionarioSenior</filter-name>
+		<filter-class>com.stefanini.hackathon2.filtros.FiltroFuncionarioSenior</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>FiltroFuncionarioSenior</filter-name>
+		<url-pattern>/restricted/*</url-pattern>
+	</filter-mapping>
+	
+		<filter>
+		<filter-name>FiltroVisitante</filter-name>
+		<filter-class>com.stefanini.hackathon2.filtros.FiltroVisitante</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>FiltroVisitante</filter-name>
+		<url-pattern>/restricted/*</url-pattern>
+	</filter-mapping>
+
 	<context-param>
-	   <param-name>primefaces.FONT_AWESOME</param-name>
-	   <param-value>true</param-value>
+		<param-name>primefaces.FONT_AWESOME</param-name>
+		<param-value>true</param-value>
 	</context-param>
 
 </web-app>

@@ -34,9 +34,11 @@ public class FiltroFuncionarioPleno implements Filter {
 
 		if (session == null) {
 			resp.sendRedirect(req.getServletContext().getContextPath() + "/paginas/principal.xhtml");
-		} else if (session.getEmprestimo() == true && session.getPessoa() == false && session.getLivro() == false
-				&& session.getAdmin() == false) {
-			chain.doFilter(request, response);
+		} else if (session.getLogado()) {
+			if (session.getEmprestimo() == true && session.getPessoa() == false && session.getLivro() == false
+					&& session.getAdmin() == false) {
+				chain.doFilter(request, response);
+			}
 		}
 	}
 

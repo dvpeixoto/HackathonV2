@@ -1,7 +1,7 @@
 package com.stefanini.hackathon2.managed.beans;
 
-import java.util.List;
 
+import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -11,7 +11,7 @@ import javax.inject.Inject;
 import com.stefanini.hackathon2.entidades.Login;
 import com.stefanini.hackathon2.servicos.LoginServico;
 
-@ManagedBean(eager = true)
+@ManagedBean
 @SessionScoped
 public class SessaoManagedBean {
 
@@ -54,7 +54,7 @@ public class SessaoManagedBean {
 		List<Login> listaLoginsDoBanco = servico.carregaTodosLoginsDoBanco();
 		for (Login loginDoBanco : listaLoginsDoBanco) {
 			if (loginDoBanco.getUsuario().equals(usuario) && loginDoBanco.getSenha().equals(senha)) {
-				this.login = loginDoBanco;
+				login = loginDoBanco;
 				login.setLogado(true);
 				if (login.getAdmin() == true) {
 					return "funcionario.xhtml?faces-redirect=true";

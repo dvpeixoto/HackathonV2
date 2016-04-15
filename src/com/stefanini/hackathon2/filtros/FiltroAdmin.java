@@ -35,8 +35,10 @@ public class FiltroAdmin implements Filter {
 
 		if (session == null) {
 			resp.sendRedirect(req.getServletContext().getContextPath() + "/paginas/principal.xhtml");
-		} else if (session.getAdmin() == true) {
-			chain.doFilter(request, response);
+		} else if (session.getLogado()) {
+			if (session.getAdmin() == true) {
+				chain.doFilter(request, response);
+			}
 		}
 	}
 
