@@ -1,16 +1,20 @@
 package com.stefanini.hackathon2.managed.beans;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileDescriptor;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.util.List;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
+
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
+
 import com.stefanini.hackathon2.entidades.Livro;
 import com.stefanini.hackathon2.servicos.LivroServico;
 import com.stefanini.hackathon2.util.Mensageiro;
@@ -90,12 +94,19 @@ public class LivroManagedBean {
 		}
 	}
 
-	public String getFoto(byte[] fotoArray) throws IOException {
+	public StreamedContent getFoto(byte[] fotoArray) throws Exception {
 		File file = new File("C://Users//dpvillanova//Desktop//fotosTemp//foto.jpg");
-		OutputStream outputStream = new FileOutputStream(file);
-		outputStream.write(fotoArray);
-		outputStream.close();
-		return file.getPath();
+		try {
+			FileOutputStream outputStream = new FileOutputStream(file);
+			outputStream.write(fotoArray);
+			FileDescriptor fd = outputStream.getFD();
+			outputStream.flush();
+			fd.sync();
+			outputStream.close();
+		} catch (Exception e) {
+			throw new Exception("Erro ao converter os bytes recebidos para imagem");
+		}
+		return imagem = new DefaultStreamedContent(new ByteArrayInputStream(fotoArray), file.getPath());
 	}
 
 }
