@@ -1,14 +1,14 @@
 package com.stefanini.hackathon2.entidades;
 
-import java.sql.Blob;
-import java.sql.SQLException;
+
+import java.io.FileDescriptor;
+import java.io.FileOutputStream;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
-import javax.swing.ImageIcon;
 
 @Entity
 public class Livro {
@@ -25,8 +25,8 @@ public class Livro {
 	@Column(nullable = false)
 	private Integer quantidadeEstoque;
 	@Lob
-	@Column(nullable = true)
-	private Blob foto;
+	@Column(nullable = true, name = "Foto")
+	private byte[] foto;
 
 	public Livro() {
 	}
@@ -71,18 +71,32 @@ public class Livro {
 		this.quantidadeEstoque = quantidadeEstoque;
 	}
 
-	public Blob getFoto() {
+	public byte[] getFoto() {
 		return foto;
 	}
 
-	public void setFoto(Blob foto) {
+	public void setFoto(byte[] foto) {
 		this.foto = foto;
 	}
 
-	public ImageIcon mostrarFoto() throws SQLException {
-		Blob blob = getFoto();
-		ImageIcon imageIcon = new ImageIcon(blob.getBytes(1, (int) blob.length()));
-		return imageIcon;
+	// public ImageIcon mostrarFoto() throws SQLException {
+	// byte[] fotoDoBanco = getFoto();
+	// ImageIcon imageIcon = new ImageIcon(fotoDoBanco);
+	// return imageIcon;
+	// }
+
+	public void FotoDoBanco() {
+		byte[] imgBytes = getFoto();
+		try {
+			FileOutputStream fos = new FileOutputStream("../resources/imagens/" + nome + ".jpg");
+			fos.write(imgBytes);
+			FileDescriptor fd = fos.getFD();
+			fos.flush();
+			fd.sync();
+			fos.close();
+		} catch (Exception e) {
+			e.toString();
+		}
 	}
 
 	@Override

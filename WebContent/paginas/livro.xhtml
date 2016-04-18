@@ -49,8 +49,10 @@
 
 						<h:form>
 							<p:outputLabel for="fotos" value="Adicionar foto:" />
+							<p:graphicImage value="#{livroManagedBean.imagem}" id="imagem"
+								cache="false" />
 							<p:fileUpload id="fotos"
-								fileUploadListener="#{livroManagedBean.livro.foto}"
+								fileUploadListener="#{livroManagedBean.uploadFoto}"
 								mode="advanced" dragDropSupport="false" multiple="true"
 								update="messages" sizeLimit="1000000" fileLimit="3"
 								allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
@@ -66,19 +68,31 @@
 						action="#{livroManagedBean.limpar()}" icon="fa fa-fw fa-eraser" />
 				</h:form>
 
-				<p:dataTable id="tabelaDeLivros" var="livro"
+				<p:dataTable id="tabelaDeLivros" var="livro" cache="disable"
 					value="#{livroManagedBean.listaDeLivrosCadastrados}"
 					emptyMessage="Não existem livros cadastrados"
 					style="padding-top:20px;">
 					<p:column headerText="Id">
 						<h:outputText value="#{livro.idLivro}" />
 					</p:column>
-					<p:column headerText="fotos">
-						<p:galleria value="#{livro.foto}" var="fotos" panelWidth="70"
-							panelHeight="70" showCaption="true">
-							<p:graphicImage name="#{livro.foto}" alt="Capa" title="Book" />
+
+					<p:column headerText="Foto">
+
+						<p:galleria value="#{livroManagedBean.getFoto(livro.foto)}" var="foto" effect="slide"
+							effectSpeed="2000" panelHeight="300" panelWidth="400"
+							frameHeight="50" frameWidth="50" filmstripPosition="bottom"
+							showOverlays="true">
+							<p:graphicImage value="#{livroManagedBean.getFoto(foto)}"
+								cache="false" width="400" height="300" title="Capa" alt="book" />
 						</p:galleria>
+
+						<!-- <p:graphicImage value="{#livroManagedBean.getFoto(livro.foto)}.jpg" cache="false"
+								width="500" height="250" /> -->
+						<!--  <h:graphicImage value="#{livroManagedBean.getFoto(livro.foto)}"/> -->
+						<!-- <img src="#{livroManagedBean.getFoto(livro.foto)}" /> -->
+
 					</p:column>
+
 					<p:column headerText="Nome">
 						<h:outputText value="#{livro.nome}" />
 					</p:column>
