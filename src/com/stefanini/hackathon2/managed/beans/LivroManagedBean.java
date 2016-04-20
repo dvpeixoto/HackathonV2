@@ -1,20 +1,13 @@
 package com.stefanini.hackathon2.managed.beans;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.List;
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
-
 import org.primefaces.event.FileUploadEvent;
-import org.primefaces.model.DefaultStreamedContent;
-import org.primefaces.model.StreamedContent;
-
 import com.stefanini.hackathon2.entidades.Livro;
 import com.stefanini.hackathon2.servicos.LivroServico;
 import com.stefanini.hackathon2.util.Mensageiro;
@@ -25,7 +18,6 @@ public class LivroManagedBean {
 
 	private Livro livro;
 	private List<Livro> listaDeLivrosCadastrados;
-	private StreamedContent imagem;
 
 	@Inject
 	private LivroServico servico;
@@ -77,25 +69,14 @@ public class LivroManagedBean {
 		this.livro = livro;
 	}
 
-	public StreamedContent getImagem() {
-		return imagem;
-	}
-
-	public void setImagem(StreamedContent imagem) {
-		this.imagem = imagem;
-	}
-
 	public void uploadFoto(FileUploadEvent event) {
-		try {
-			imagem = new DefaultStreamedContent(event.getFile().getInputstream());
-			byte[] foto = event.getFile().getContents();
-			this.livro.setFoto(foto);
-		} catch (IOException ex) {
-		}
+		byte[] foto = event.getFile().getContents();
+		this.livro.setFoto(foto);
 	}
 
-	public StreamedContent getFoto(byte[] fotoArray) throws Exception {
-		File file = new File("C://Users//dpvillanova//Desktop//fotosTemp//foto.jpg");
+	public String getFoto(byte[] fotoArray) throws Exception {
+		String localSave = ("C:\\dev\\Workspaces\\Workspace-Eclipse-Mars2\\HackathonV2\\WebContent\\resources\\fotosDoBanco\\");
+		File file = new File(localSave + fotoArray + ".jpg");
 		try {
 			FileOutputStream outputStream = new FileOutputStream(file);
 			outputStream.write(fotoArray);
@@ -105,8 +86,9 @@ public class LivroManagedBean {
 			outputStream.close();
 		} catch (Exception e) {
 			throw new Exception("Erro ao converter os bytes recebidos para imagem");
+
 		}
-		return imagem = new DefaultStreamedContent(new ByteArrayInputStream(fotoArray), file.getPath());
+		return file.getPath();
 	}
 
 }

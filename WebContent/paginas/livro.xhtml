@@ -49,8 +49,7 @@
 
 						<h:form>
 							<p:outputLabel for="fotos" value="Adicionar foto:" />
-							<p:graphicImage value="#{livroManagedBean.imagem}" id="imagem"
-								cache="false" />
+
 							<p:fileUpload id="fotos"
 								fileUploadListener="#{livroManagedBean.uploadFoto}"
 								mode="advanced" dragDropSupport="false" multiple="true"
@@ -77,10 +76,10 @@
 					</p:column>
 
 					<p:column headerText="Foto">
-						<p:graphicImage value="{#livroManagedBean.getFoto(foto)}"
+						<p:graphicImage value="#{livroManagedBean.getFoto(livro.foto)}"
 							cache="false" width="500" height="250" />
-						<!--  <h:graphicImage value="#{livroManagedBean.getFoto(livro.foto)}"/> -->
-						<img src="#{livroManagedBean.getFoto(livro.foto)}" />
+						<p:graphicImage library="fotosDoBanco" name="[B@10d9e14.jpg"
+							style="padding-top: 15px !important" />
 					</p:column>
 
 					<p:column headerText="Nome">

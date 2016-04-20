@@ -1,8 +1,6 @@
 package com.stefanini.hackathon2.entidades;
 
-
-import java.io.FileDescriptor;
-import java.io.FileOutputStream;
+import java.util.Arrays;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -79,31 +77,12 @@ public class Livro {
 		this.foto = foto;
 	}
 
-	// public ImageIcon mostrarFoto() throws SQLException {
-	// byte[] fotoDoBanco = getFoto();
-	// ImageIcon imageIcon = new ImageIcon(fotoDoBanco);
-	// return imageIcon;
-	// }
-
-	public void FotoDoBanco() {
-		byte[] imgBytes = getFoto();
-		try {
-			FileOutputStream fos = new FileOutputStream("../resources/imagens/" + nome + ".jpg");
-			fos.write(imgBytes);
-			FileDescriptor fd = fos.getFD();
-			fos.flush();
-			fd.sync();
-			fos.close();
-		} catch (Exception e) {
-			e.toString();
-		}
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((autor == null) ? 0 : autor.hashCode());
+		result = prime * result + Arrays.hashCode(foto);
 		result = prime * result + ((idLivro == null) ? 0 : idLivro.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((paginas == null) ? 0 : paginas.hashCode());
@@ -124,6 +103,8 @@ public class Livro {
 			if (other.autor != null)
 				return false;
 		} else if (!autor.equals(other.autor))
+			return false;
+		if (!Arrays.equals(foto, other.foto))
 			return false;
 		if (idLivro == null) {
 			if (other.idLivro != null)
